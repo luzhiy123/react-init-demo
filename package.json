@@ -1,0 +1,43 @@
+{
+  "name": "vite-react-typescript-starter",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "build": "vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",
+    "prettier": "prettier src",
+    "preview": "vite preview",
+    "start": "vite"
+  },
+  "dependencies": {
+    "@ant-design/pro-layout": "^7.19.8",
+    "antd": "^5.19.1",
+    "axios": "^1.7.2",
+    "lodash": "^4.17.21",
+    "mobx": "^6.13.0",
+    "mobx-react": "^9.1.1",
+    "qs": "^6.12.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.24.1"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.17.6",
+    "@types/mockjs": "^1.0.10",
+    "@types/node": "^20.14.10",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@umijs/fabric": "^4.0.1",
+    "@vitejs/plugin-react": "^4.3.1",
+    "mockjs": "^1.1.0",
+    "prettier": "^3.3.2",
+    "prettier-plugin-organize-imports": "^4.0.0",
+    "prettier-plugin-packagejson": "^2.5.0",
+    "prettier-plugin-two-style-order": "^1.0.1",
+    "sass": "^1.77.6",
+    "vite": "^5.3.2",
+    "vite-plugin-mock": "^3.0.2",
+    "vite-plugin-style-import": "^2.0.0"
+  }
+}

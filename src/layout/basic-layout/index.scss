@@ -1,0 +1,16 @@
+.zs-layout {
+  &-header {
+    height: 64;
+    padding: 48;
+    color: '#fff';
+    line-height: '64px';
+    text-align: 'center';
+  }
+  &-sider {
+    width: 256px;
+    height: 100vh;
+  }
+  &-content {
+    min-height: 400px;
+  }
+}

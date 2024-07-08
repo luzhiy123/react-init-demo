@@ -1,0 +1,18 @@
+@import '~antd/es/style/themes/index';
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: auto;
+  // background: url('./imgs/login-bg.jpg');
+  background-position: center top;
+  background-size: 1920px;
+}
+
+.content {
+  width: 860px;
+  height: 500px;
+  margin: 80px auto 0;
+}
