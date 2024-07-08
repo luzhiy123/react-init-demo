@@ -1,0 +1,4 @@
+.eslintignore
+*.png
+/build
+/public
