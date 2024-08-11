@@ -1,16 +1,10 @@
 import request from '@/untils/request'
 import type { TableAxiosResponse } from 'axios'
 import { makeAutoObservable } from 'mobx'
+import type { UserItem } from '../interface/base'
 
-export interface TableItem {
-  key: string
-  name: string
-  age: number
-  city: string
-  created: string
-}
 export class TabseService {
-  data: TableItem[] = []
+  data: UserItem[] = []
   total = 0
 
   constructor() {
@@ -20,7 +14,7 @@ export class TabseService {
   loadData = async () => {
     const {
       data: { data, total }
-    } = await request<TableAxiosResponse<TableItem>>('/api/getList')
+    } = await request<TableAxiosResponse<UserItem>>('/api/getList')
     this.data = data
     this.total = total
   }

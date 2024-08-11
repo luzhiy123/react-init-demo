@@ -1,18 +1,14 @@
 import request from '@/untils/request'
 import { message } from 'antd'
 import { makeAutoObservable } from 'mobx'
+import type { UserFormItem } from './interface'
 
-export interface TestFormData {
-  name: string
-  age: number
-  city: string
-}
 export class FormStore {
   constructor() {
     makeAutoObservable(this)
   }
 
-  submit = async (data: TestFormData) => {
+  submit = async (data: UserFormItem) => {
     await request('/api/form', {
       method: 'post',
       data: {

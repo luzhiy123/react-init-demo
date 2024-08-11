@@ -2,10 +2,10 @@ import { Table } from 'antd'
 import type { ColumnType } from 'antd/es/table'
 import { observer } from 'mobx-react'
 import { useEffect } from 'react'
-import type { TableItem } from './table-store'
+import type { UserItem } from '../interface/base'
 import { TabseService as TabseStore } from './table-store'
 
-const columns: ColumnType<TableItem>[] = [
+const columns: ColumnType<UserItem>[] = [
   {
     dataIndex: 'name',
     title: '姓名'
