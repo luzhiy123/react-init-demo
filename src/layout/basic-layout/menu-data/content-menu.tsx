@@ -7,13 +7,17 @@ const fortressMachine: BasicMenuDataItem = {
   children: [
     {
       name: 'Home',
-      path: '/home',
-      authority: 'home'
+      path: '/home'
     },
     {
       name: 'Table',
       path: '/table',
       authority: 'table'
+    },
+    {
+      name: 'Form',
+      path: '/form',
+      authority: 'form'
     },
     {
       name: 'NoPerm',

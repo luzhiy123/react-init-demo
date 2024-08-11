@@ -4,7 +4,7 @@ import contentRouter from './content-router'
 
 const routerObjs = [...contentRouter]
 
-const routers = createBrowserRouter([
+const router = createBrowserRouter([
   {
     id: 'root',
     path: '/',
@@ -15,4 +15,4 @@ const routers = createBrowserRouter([
 
 export { routerObjs }
 
-export default routers
+export default router

@@ -3,11 +3,11 @@ import type { TableAxiosResponse } from 'axios'
 import { makeAutoObservable } from 'mobx'
 
 export interface TableItem {
-  key: string;
-  name: string;
-  age: number;
-  city: string;
-  created: string;
+  key: string
+  name: string
+  age: number
+  city: string
+  created: string
 }
 export class TabseService {
   data: TableItem[] = []

@@ -2,8 +2,8 @@ import { Table } from 'antd'
 import type { ColumnType } from 'antd/es/table'
 import { observer } from 'mobx-react'
 import { useEffect } from 'react'
-import type { TableItem } from './table-service'
-import { TabseService } from './table-service'
+import type { TableItem } from './table-store'
+import { TabseService as TabseStore } from './table-store'
 
 const columns: ColumnType<TableItem>[] = [
   {
@@ -24,7 +24,7 @@ const columns: ColumnType<TableItem>[] = [
   }
 ]
 
-const service = new TabseService()
+const service = new TabseStore()
 
 function TablePage() {
   useEffect(() => {

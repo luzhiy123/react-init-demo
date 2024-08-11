@@ -10,8 +10,8 @@
     "start": "vite"
   },
   "dependencies": {
-    "@ant-design/pro-layout": "^7.19.8",
-    "antd": "^5.19.1",
+    "@ant-design/pro-form": "^2.29.0",
+    "antd": "^5.19.2",
     "axios": "^1.7.2",
     "lodash": "^4.17.21",
     "mobx": "^6.13.0",
@@ -30,6 +30,7 @@
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@umijs/fabric": "^4.0.1",
     "@vitejs/plugin-react": "^4.3.1",
+    "less": "^4.2.0",
     "mockjs": "^1.1.0",
     "prettier": "^3.3.2",
     "prettier-plugin-organize-imports": "^4.0.0",

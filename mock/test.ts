@@ -26,6 +26,15 @@ export default [
     }
   },
   {
+    url: '/api/form',
+    method: 'post',
+    response: () => {
+      return {
+        status: 'ok'
+      }
+    }
+  },
+  {
     url: '/api/user/self',
     method: 'get',
     response: () => {
@@ -37,7 +46,7 @@ export default [
           'age|0-100': 100,
           city: '@city(true)',
           created: '@datetime',
-          resources: ['table', 'home']
+          resources: ['table', 'form']
         }
       })
     }
