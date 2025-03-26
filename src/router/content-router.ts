@@ -1,9 +1,14 @@
+import Demo from '@/pages/demo'
 import Home from '@/pages/home'
 import Table from '@/pages/user/table'
 import TestForm from '@/pages/user/test-form'
 import type { RouteObject } from 'react-router-dom'
 
 const contentRouter: RouteObject[] = [
+  {
+    path: 'demo',
+    Component: Demo
+  },
   {
     path: 'home',
     Component: Home

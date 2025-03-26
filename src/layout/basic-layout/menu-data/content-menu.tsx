@@ -10,6 +10,10 @@ const fortressMachine: BasicMenuDataItem = {
       path: '/home'
     },
     {
+      name: 'demo',
+      path: '/demo'
+    },
+    {
       name: 'Table',
       path: '/table',
       authority: 'table'
