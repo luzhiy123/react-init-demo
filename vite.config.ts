@@ -14,8 +14,11 @@ export default ({}: ConfigEnv): UserConfigExport => ({
   ],
   css: {
     preprocessorOptions: {
-      less: {
-        javascriptEnabled: true
+      scss: {
+        // 自动注入全局变量（可选）
+        additionalData: "@use '@/styles/variables' as *;",
+        // 配置 Sass 的根路径查找
+        loadPaths: ['./src']
       }
     }
   },
