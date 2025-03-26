@@ -2,3 +2,5 @@
 *.png
 /build
 /public
+
+src/router/content-router.tsx

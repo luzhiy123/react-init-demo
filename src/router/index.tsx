@@ -7,7 +7,6 @@ const routerObjs: RouteObject[] = [...contentRouter]
 
 const router = createBrowserRouter([
   {
-    id: 'root',
     path: '/',
     Component: BasicLayout,
     children: contentRouter

@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "module": "esnext",
+    "module": "CommonJS",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "importHelpers": true,
@@ -13,8 +13,9 @@
     "paths": {
       "@/*": ["src/*"]
     },
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "types": ["node", "vite/client"]
   },
-  "include": ["src/**/*", "mock/*"],
+  "include": ["src/**/*", "mock/*", "router-config/*"],
   "exclude": ["node_modules", "dist"]
 }
