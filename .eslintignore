@@ -1,6 +1,0 @@
-.eslintrc.js
-node_modules/
-public/
-vite.config.ts
-
-src/router/content-router.tsx

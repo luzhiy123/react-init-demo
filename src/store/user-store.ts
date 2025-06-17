@@ -1,6 +1,6 @@
 import request from '@/untils/request'
 import type { ExAxiosResponse } from 'axios'
-import { makeAutoObservable } from 'mobx'
+import { makeAutoObservable, runInAction } from 'mobx'
 import { redirect } from 'react-router-dom'
 
 export type CurrentUser = {
@@ -32,11 +32,14 @@ export default class UserStore {
     makeAutoObservable(this)
   }
 
-  loadUser = async () => {
+  async loadUser() {
     this.loading = true
-    const {
-      data: { data }
-    } = await queryCurrent()
+    return queryCurrent()
+      .then(({ data }) => {
+        runInAction(() => {
+          this.user = data.data
+        })
+      })
       .catch(() => {
         this.goLogin()
         return Promise.reject()
@@ -44,9 +47,8 @@ export default class UserStore {
       .finally(() => {
         this.loading = false
       })
-    this.user = data
   }
-  endLogout = () => {
+  endLogout() {
     this.loading = true
     this.goLogin()
     clearCookie().finally(() => {

@@ -1,6 +1,6 @@
 import { Table } from 'antd'
 import type { ColumnType } from 'antd/es/table'
-import { observer } from 'mobx-react'
+import { observer } from 'mobx-react-lite'
 import { useEffect } from 'react'
 import type { UserItem } from '../interface/base'
 import { TabseService as TabseStore } from './table-store'

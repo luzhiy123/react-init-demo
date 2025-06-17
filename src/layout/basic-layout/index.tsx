@@ -1,14 +1,14 @@
 import { useStore } from '@/store'
 import { Layout } from 'antd'
-import { observer } from 'mobx-react'
-import React, { useEffect } from 'react'
+import { observer } from 'mobx-react-lite'
+import { useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 import './index.scss'
 import SiderMenu from './sider-menu'
 
 const { Header, Footer, Sider, Content } = Layout
 
-const BasicLayout: React.FC = () => {
+const BasicLayout = () => {
   const userStore = useStore('user')
 
   useEffect(() => {

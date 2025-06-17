@@ -8,7 +8,7 @@ export class FormStore {
     makeAutoObservable(this)
   }
 
-  submit = async (data: UserFormItem) => {
+  async submit(data: UserFormItem) {
     await request('/api/form', {
       method: 'post',
       data: {

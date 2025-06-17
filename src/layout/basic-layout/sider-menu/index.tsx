@@ -3,14 +3,14 @@ import { useStore } from '@/store'
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
 import type { MenuProps } from 'antd'
 import { Button, Menu } from 'antd'
-import { observer } from 'mobx-react'
+import { observer } from 'mobx-react-lite'
 import { useMemo, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import type { BasicMenuDataItem } from '../interdace'
 import { baseMenuData, checkMenuData } from '../menu-data'
 import './index.scss'
 
-type MenuItem = Required<MenuProps>['items'][number];
+type MenuItem = Required<MenuProps>['items'][number]
 
 function formatMenu(list?: BasicMenuDataItem[]): MenuItem[] | undefined {
   return list?.map((item) => {

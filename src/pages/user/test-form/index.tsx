@@ -1,6 +1,6 @@
 import ProForm, { ProFormDigit, ProFormText } from '@ant-design/pro-form'
 import { Form } from 'antd'
-import { observer } from 'mobx-react'
+import { observer } from 'mobx-react-lite'
 import { useNavigate } from 'react-router-dom'
 import { FormStore } from './form-store'
 import type { UserFormItem } from './interface'

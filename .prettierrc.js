@@ -1,12 +1,16 @@
-const fabric = require('@umijs/fabric')
-
-module.exports = {
-  ...fabric.prettier,
+const config = {
   plugins: [
     'prettier-plugin-organize-imports',
     'prettier-plugin-packagejson',
-    'prettier-plugin-two-style-order'
+    'prettier-plugin-two-style-order',
   ],
-  trailingComma: 'none',
-  semi: false
-}
+  semi: true,
+  singleQuote: true,
+  printWidth: 100,
+  tabWidth: 2,
+  trailingComma: 'es5',
+  bracketSpacing: true,
+  arrowParens: 'avoid',
+};
+
+export default config;
