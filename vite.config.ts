@@ -3,19 +3,18 @@ import path from 'path';
 import { ConfigEnv, UserConfigExport } from 'vite';
 import { viteMockServe } from 'vite-plugin-mock';
 
-// https://vitejs.dev/config/
-export default ({}: ConfigEnv): UserConfigExport => ({
+export default ({ command }: ConfigEnv): UserConfigExport => ({
   plugins: [
     react(),
     viteMockServe({
       mockPath: 'mock',
-      enable: true,
+      enable: command === 'serve',
     }),
   ],
   css: {
     preprocessorOptions: {
       scss: {
-        // 自动注入全局变量（可选）
+        // 自动注入全局变量
         additionalData: "@use '@/styles/variables' as *;",
         // 配置 Sass 的根路径查找
         loadPaths: ['./src'],
@@ -24,10 +23,6 @@ export default ({}: ConfigEnv): UserConfigExport => ({
   },
   resolve: {
     alias: [
-      {
-        find: /^~/,
-        replacement: '',
-      },
       {
         find: '@',
         replacement: path.resolve(__dirname, './src'),

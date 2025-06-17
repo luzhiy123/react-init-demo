@@ -7,7 +7,7 @@ import tseslint from 'typescript-eslint';
 
 export default [
   {
-    ignores: ['dist', 'build', 'node_modules'],
+    ignores: ['dist', 'build', 'public', 'node_modules'],
   },
 
   // JavaScript 默认推荐配置
