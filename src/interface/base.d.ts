@@ -1,4 +1,4 @@
 interface RouterBase {
-  path: string
-  component: string
+  path: string;
+  component: string;
 }

@@ -1,5 +1,5 @@
-import Mock from 'mockjs'
-import type { MockMethod } from 'vite-plugin-mock'
+import Mock from 'mockjs';
+import type { MockMethod } from 'vite-plugin-mock';
 
 const { list } = Mock.mock({
   'list|5-100': [
@@ -8,10 +8,10 @@ const { list } = Mock.mock({
       name: '@cname',
       'age|0-100': 100,
       city: '@city(true)',
-      created: '@datetime'
-    }
-  ]
-})
+      created: '@datetime',
+    },
+  ],
+});
 
 export default [
   {
@@ -21,18 +21,18 @@ export default [
       return {
         status: 'ok',
         data: list,
-        total: list.length
-      }
-    }
+        total: list.length,
+      };
+    },
   },
   {
     url: '/api/form',
     method: 'post',
     response: () => {
       return {
-        status: 'ok'
-      }
-    }
+        status: 'ok',
+      };
+    },
   },
   {
     url: '/api/user/self',
@@ -46,9 +46,9 @@ export default [
           'age|0-100': 100,
           city: '@city(true)',
           created: '@datetime',
-          resources: ['table', 'form']
-        }
-      })
-    }
-  }
-] as MockMethod[]
+          resources: ['table', 'form'],
+        },
+      });
+    },
+  },
+] as MockMethod[];

@@ -1,4 +1,4 @@
-import type { BasicMenuDataItem } from '../interdace'
+import type { BasicMenuDataItem } from '../interdace';
 
 const fortressMachine: BasicMenuDataItem = {
   name: 'Demo',
@@ -7,23 +7,23 @@ const fortressMachine: BasicMenuDataItem = {
   children: [
     {
       name: 'Home',
-      path: '/home'
+      path: '/home',
     },
     {
       name: 'Table',
       path: '/table',
-      authority: 'table'
+      authority: 'table',
     },
     {
       name: 'Form',
       path: '/form',
-      authority: 'form'
+      authority: 'form',
     },
     {
       name: 'NoPerm',
       path: '/noperm',
-      authority: 'no-perm'
-    }
-  ]
-}
-export default fortressMachine
+      authority: 'no-perm',
+    },
+  ],
+};
+export default fortressMachine;

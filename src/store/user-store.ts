@@ -1,61 +1,61 @@
-import request from '@/untils/request'
-import type { ExAxiosResponse } from 'axios'
-import { makeAutoObservable, runInAction } from 'mobx'
-import { redirect } from 'react-router-dom'
+import request from '@/untils/request';
+import type { ExAxiosResponse } from 'axios';
+import { makeAutoObservable, runInAction } from 'mobx';
+import { redirect } from 'react-router-dom';
 
 export type CurrentUser = {
-  cpwd?: boolean
-  email?: string
-  is_admin?: boolean
-  name?: string
-  phone?: string
-  resources?: string[]
-  key?: string
-}
+  cpwd?: boolean;
+  email?: string;
+  is_admin?: boolean;
+  name?: string;
+  phone?: string;
+  resources?: string[];
+  key?: string;
+};
 
 async function queryCurrent() {
   return request<ExAxiosResponse<CurrentUser>>(`/api/user/self`, {
-    method: 'get'
-  })
+    method: 'get',
+  });
 }
 async function clearCookie() {
   return request<ExAxiosResponse<CurrentUser>>(`/api/user/logout`, {
-    method: 'post'
-  })
+    method: 'post',
+  });
 }
 
 export default class UserStore {
-  user: CurrentUser | null = null
-  loading = false
+  user: CurrentUser | null = null;
+  loading = false;
 
   constructor() {
-    makeAutoObservable(this)
+    makeAutoObservable(this);
   }
 
   async loadUser() {
-    this.loading = true
+    this.loading = true;
     return queryCurrent()
       .then(({ data }) => {
         runInAction(() => {
-          this.user = data.data
-        })
+          this.user = data.data;
+        });
       })
       .catch(() => {
-        this.goLogin()
-        return Promise.reject()
+        this.goLogin();
+        return Promise.reject();
       })
       .finally(() => {
-        this.loading = false
-      })
+        this.loading = false;
+      });
   }
   endLogout() {
-    this.loading = true
-    this.goLogin()
+    this.loading = true;
+    this.goLogin();
     clearCookie().finally(() => {
-      this.loading = false
-    })
+      this.loading = false;
+    });
   }
   goLogin = () => {
-    redirect('/login')
-  }
+    redirect('/login');
+  };
 }

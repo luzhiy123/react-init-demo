@@ -15,48 +15,45 @@ const check = <T, K>(
   authority: IAuthorityType, // 路由中配置点
   userAuthority: string[],
   target: T,
-  Exception: K,
+  Exception: K
 ): T | K => {
   if (!authority) {
-    return target
+    return target;
   }
   // 数组处理
   if (Array.isArray(authority)) {
     if (
-      userAuthority.some((item) =>
-        authority.some((it) => {
-          return `${item}.`.startsWith(`${it}.`)
-        }),
+      userAuthority.some(item =>
+        authority.some(it => {
+          return `${item}.`.startsWith(`${it}.`);
+        })
       )
     ) {
-      return target
+      return target;
     }
 
-    return Exception
+    return Exception;
   }
 
   // string 处理
   if (typeof authority === 'string') {
-    const judge = `${authority}.`
-    if (userAuthority.some((item) => `${item}.`.startsWith(judge))) {
-      return target
+    const judge = `${authority}.`;
+    if (userAuthority.some(item => `${item}.`.startsWith(judge))) {
+      return target;
     }
-    return Exception
+    return Exception;
   }
 
   // Function 处理
   if (typeof authority === 'function') {
-    try {
-      const bool = authority(userAuthority)
-      if (bool) {
-        return target
-      }
-      return Exception
-    } catch (error) {
-      throw error
+    const bool = authority(userAuthority);
+    if (bool) {
+      return target;
     }
+    return Exception;
   }
-  throw new Error('unsupported parameters')
-}
 
-export default check
+  throw new Error('unsupported parameters');
+};
+
+export default check;

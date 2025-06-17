@@ -1,28 +1,28 @@
-import IconFont from '@/components/icon-font'
-import { useStore } from '@/store'
-import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
-import type { MenuProps } from 'antd'
-import { Button, Menu } from 'antd'
-import { observer } from 'mobx-react-lite'
-import { useMemo, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import type { BasicMenuDataItem } from '../interdace'
-import { baseMenuData, checkMenuData } from '../menu-data'
-import './index.scss'
+import IconFont from '@/components/icon-font';
+import { useStore } from '@/store';
+import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
+import type { MenuProps } from 'antd';
+import { Button, Menu } from 'antd';
+import { observer } from 'mobx-react-lite';
+import { useMemo, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import type { BasicMenuDataItem } from '../interdace';
+import { baseMenuData, checkMenuData } from '../menu-data';
+import './index.scss';
 
-type MenuItem = Required<MenuProps>['items'][number]
+type MenuItem = Required<MenuProps>['items'][number];
 
 function formatMenu(list?: BasicMenuDataItem[]): MenuItem[] | undefined {
-  return list?.map((item) => {
-    const it = item!
+  return list?.map(item => {
+    const it = item!;
 
     if (it.children?.length) {
       return {
         key: it.key || it.path,
         icon: <IconFont className="zs-menu-icon" type={it.icon} />,
         label: it.name,
-        children: formatMenu(it.children!)
-      }
+        children: formatMenu(it.children!),
+      };
     }
 
     return {
@@ -31,25 +31,25 @@ function formatMenu(list?: BasicMenuDataItem[]): MenuItem[] | undefined {
         <Link to={it.path} target={it.target}>
           {it.meta?.title || it.name}
         </Link>
-      )
-    }
-  })
+      ),
+    };
+  });
 }
 
 function SiderMenu() {
-  const [collapsed, setCollapsed] = useState(false)
-  const userStore = useStore('user')
-  const location = useLocation()
-  const selectedKeys = [location.pathname]
+  const [collapsed, setCollapsed] = useState(false);
+  const userStore = useStore('user');
+  const location = useLocation();
+  const selectedKeys = [location.pathname];
 
   const menuInfo = useMemo(() => {
-    const menuData = checkMenuData(userStore.user?.resources || [], baseMenuData)
-    return formatMenu(menuData)
-  }, [userStore.user?.resources])
+    const menuData = checkMenuData(userStore.user?.resources || [], baseMenuData);
+    return formatMenu(menuData);
+  }, [userStore.user?.resources]);
 
   const toggleCollapsed = () => {
-    setCollapsed(!collapsed)
-  }
+    setCollapsed(!collapsed);
+  };
 
   return (
     <div>
@@ -65,7 +65,7 @@ function SiderMenu() {
         items={menuInfo}
       />
     </div>
-  )
+  );
 }
 
-export default observer(SiderMenu)
+export default observer(SiderMenu);

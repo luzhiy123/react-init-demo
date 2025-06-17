@@ -1,19 +1,19 @@
-import { useStore } from '@/store'
-import { Layout } from 'antd'
-import { observer } from 'mobx-react-lite'
-import { useEffect } from 'react'
-import { Outlet } from 'react-router-dom'
-import './index.scss'
-import SiderMenu from './sider-menu'
+import { useStore } from '@/store';
+import { Layout } from 'antd';
+import { observer } from 'mobx-react-lite';
+import { useEffect } from 'react';
+import { Outlet } from 'react-router-dom';
+import './index.scss';
+import SiderMenu from './sider-menu';
 
-const { Header, Footer, Sider, Content } = Layout
+const { Header, Footer, Sider, Content } = Layout;
 
 const BasicLayout = () => {
-  const userStore = useStore('user')
+  const userStore = useStore('user');
 
   useEffect(() => {
-    userStore.loadUser()
-  }, [userStore])
+    userStore.loadUser();
+  }, [userStore]);
 
   return (
     <Layout>
@@ -28,7 +28,7 @@ const BasicLayout = () => {
         <Footer className="zs-layout-footer">Footer</Footer>
       </Layout>
     </Layout>
-  )
-}
+  );
+};
 
-export default observer(BasicLayout)
+export default observer(BasicLayout);

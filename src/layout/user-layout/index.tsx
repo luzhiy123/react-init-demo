@@ -1,5 +1,5 @@
-import { Outlet } from 'react-router-dom'
-import styles from './index.scss'
+import { Outlet } from 'react-router-dom';
+import styles from './index.scss';
 
 const UserLayout = () => {
   return (
@@ -8,7 +8,7 @@ const UserLayout = () => {
         <Outlet />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default UserLayout
+export default UserLayout;

@@ -1,21 +1,21 @@
-import ProForm, { ProFormDigit, ProFormText } from '@ant-design/pro-form'
-import { Form } from 'antd'
-import { observer } from 'mobx-react-lite'
-import { useNavigate } from 'react-router-dom'
-import { FormStore } from './form-store'
-import type { UserFormItem } from './interface'
+import ProForm, { ProFormDigit, ProFormText } from '@ant-design/pro-form';
+import { Form } from 'antd';
+import { observer } from 'mobx-react-lite';
+import { useNavigate } from 'react-router-dom';
+import { FormStore } from './form-store';
+import type { UserFormItem } from './interface';
 
-const service = new FormStore()
+const service = new FormStore();
 
 function TablePage() {
-  const [form] = Form.useForm()
-  const navigate = useNavigate()
+  const [form] = Form.useForm();
+  const navigate = useNavigate();
 
   const submit = (data: UserFormItem) => {
     return service.submit(data).then(() => {
-      navigate('/table')
-    })
-  }
+      navigate('/table');
+    });
+  };
 
   return (
     <ProForm form={form} onFinish={submit}>
@@ -24,8 +24,8 @@ function TablePage() {
         name="name"
         rules={[
           {
-            required: true
-          }
+            required: true,
+          },
         ]}
       />
       <ProFormDigit
@@ -33,17 +33,17 @@ function TablePage() {
         name="age"
         min={0}
         fieldProps={{
-          step: 1
+          step: 1,
         }}
         rules={[
           {
-            required: true
-          }
+            required: true,
+          },
         ]}
       />
       <ProFormText label="城市" name="city" />
     </ProForm>
-  )
+  );
 }
 
-export default observer(TablePage)
+export default observer(TablePage);

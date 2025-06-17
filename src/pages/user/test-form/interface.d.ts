@@ -1,3 +1,3 @@
-import type { UserItem } from '../interface/base'
+import type { UserItem } from '../interface/base';
 
-export type UserFormItem = Omit<UserItem, 'key' | 'created'>
+export type UserFormItem = Omit<UserItem, 'key' | 'created'>;

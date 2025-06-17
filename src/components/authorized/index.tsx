@@ -1,6 +1,6 @@
-import Authorized from './authorized'
-import check from './check'
+import Authorized from './authorized';
+import check from './check';
 
-Authorized.check = check
+Authorized.check = check;
 
-export default Authorized
+export default Authorized;
