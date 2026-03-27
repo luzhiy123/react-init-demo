@@ -15,7 +15,7 @@ const check = <T, K>(
   authority: IAuthorityType, // 路由中配置点
   userAuthority: string[],
   target: T,
-  Exception: K
+  Exception: K,
 ): T | K => {
   if (!authority) {
     return target;
@@ -23,10 +23,10 @@ const check = <T, K>(
   // 数组处理
   if (Array.isArray(authority)) {
     if (
-      userAuthority.some(item =>
-        authority.some(it => {
+      userAuthority.some((item) =>
+        authority.some((it) => {
           return `${item}.`.startsWith(`${it}.`);
-        })
+        }),
       )
     ) {
       return target;
@@ -38,7 +38,7 @@ const check = <T, K>(
   // string 处理
   if (typeof authority === 'string') {
     const judge = `${authority}.`;
-    if (userAuthority.some(item => `${item}.`.startsWith(judge))) {
+    if (userAuthority.some((item) => `${item}.`.startsWith(judge))) {
       return target;
     }
     return Exception;

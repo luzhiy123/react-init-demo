@@ -8,5 +8,5 @@ export function useQuery(key: string) {
 export function useQuerys(keys: string[]) {
   const { search } = useLocation();
   const searchParams = new URLSearchParams(search);
-  return keys.map(item => searchParams.get(item)) as string[];
+  return keys.map((item) => searchParams.get(item)) as string[];
 }

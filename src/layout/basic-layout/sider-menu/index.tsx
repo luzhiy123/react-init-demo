@@ -13,7 +13,7 @@ import './index.scss';
 type MenuItem = Required<MenuProps>['items'][number];
 
 function formatMenu(list?: BasicMenuDataItem[]): MenuItem[] | undefined {
-  return list?.map(item => {
+  return list?.map((item) => {
     const it = item!;
 
     if (it.children?.length) {
