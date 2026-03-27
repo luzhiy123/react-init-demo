@@ -1,15 +1,15 @@
 import { BasicLayout } from '@/layout';
 import type { RouteObject } from 'react-router-dom';
 import { createBrowserRouter } from 'react-router-dom';
-import contentRouter from './content-router';
+import generatedRoutes from './generated-routes';
 
-const routerObjs: RouteObject[] = [...contentRouter];
+const routerObjs: RouteObject[] = [...generatedRoutes];
 
 const router = createBrowserRouter([
   {
     path: '/',
     Component: BasicLayout,
-    children: contentRouter,
+    children: generatedRoutes,
   },
 ]);
 

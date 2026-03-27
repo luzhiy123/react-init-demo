@@ -1,64 +1,67 @@
-import fs from 'fs';
-import path from 'path';
-import type { RouteConfig } from '.';
-import routesConfig from '.';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
+import type { RouteConfig } from './index';
+import routesConfig from './index';
 
-const imLines: string[] = [];
+const importLines: string[] = [];
+let importIndex = 0;
 
-function capitalizeFirstLetter(str: string) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
+function createImportName(route: RouteConfig): string {
+  importIndex += 1;
+  const routeName = route.name ?? route.path ?? `route${importIndex}`;
+  const normalized = routeName.replace(/[^a-zA-Z0-9]/g, ' ').trim();
+  const pascal = normalized
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((item) => item[0].toUpperCase() + item.slice(1))
+    .join('');
+
+  return pascal || `Route${importIndex}`;
 }
 
-/**
- * 序列化一个 RouteConfig 对象，生成对应的 TSX 代码片段
- * @param route RouteConfig 对象
- * @param indent 缩进字符串
- */
 function serializeRoute(route: RouteConfig, indent = '  '): string {
-  const lines: string[] = [];
-  lines.push('{');
+  const lines: string[] = ['{'];
 
-  // 输出 path（如果有）
   if (route.path) {
     lines.push(`${indent}path: ${JSON.stringify(route.path)},`);
   }
 
-  // 如果有 redirect，则生成 element 为 <Navigate to="xxx" />
   if (route.redirect) {
-    lines.push(`${indent}element: <Navigate to=${JSON.stringify(route.redirect)} />,`);
-  } else if (route.component) {
-    // 如果有 component，则使用 React.lazy 动态加载
-    const name = capitalizeFirstLetter(route.name || route.path || '');
-    imLines.push(`const ${name} =  React.lazy(() => import(${JSON.stringify(route.component)}))`);
-    lines.push(`${indent}element:  (
-      <Suspense fallback={<div>Loading...</div>}>
-        <${name} />
-      </Suspense>
-    ),`);
+    lines.push(`${indent}element: <Navigate to=${JSON.stringify(route.redirect)} replace />,`);
   }
 
-  // 将 name、authority、meta 挂在 handle 属性上（如果存在任一属性）
+  if (route.component) {
+    const importName = createImportName(route);
+    importLines.push(
+      `const ${importName} = React.lazy(() => import(${JSON.stringify(route.component)}));`,
+    );
+
+    lines.push(`${indent}element: (`);
+    lines.push(`${indent}  <Suspense fallback={<div>Loading...</div>}>`);
+    lines.push(`${indent}    <${importName} />`);
+    lines.push(`${indent}  </Suspense>`);
+    lines.push(`${indent}),`);
+  }
+
   if (route.name || route.authority || route.meta) {
     lines.push(`${indent}handle: {`);
     if (route.name) {
-      lines.push(`${indent}${indent}name: ${JSON.stringify(route.name)},`);
+      lines.push(`${indent}  name: ${JSON.stringify(route.name)},`);
     }
     if (route.authority) {
-      lines.push(`${indent}${indent}authority: ${JSON.stringify(route.authority)},`);
+      lines.push(`${indent}  authority: ${JSON.stringify(route.authority)},`);
     }
     if (route.meta) {
-      // 直接转换为对象字面量字符串
-      lines.push(`${indent}${indent}meta: ${JSON.stringify(route.meta, null, indent)},`);
+      lines.push(`${indent}  meta: ${JSON.stringify(route.meta)},`);
     }
     lines.push(`${indent}},`);
   }
 
-  // 如果存在嵌套路由，则递归处理 children
-  if (route.routes && route.routes.length > 0) {
+  if (route.routes?.length) {
     lines.push(`${indent}children: [`);
-    for (const child of route.routes) {
-      lines.push(indent + indent + serializeRoute(child, indent + indent));
-    }
+    lines.push(
+      route.routes.map((child) => `${indent}  ${serializeRoute(child, `${indent}  `)}`).join(',\n'),
+    );
     lines.push(`${indent}],`);
   }
 
@@ -66,31 +69,25 @@ function serializeRoute(route: RouteConfig, indent = '  '): string {
   return lines.join('\n');
 }
 
-/**
- * 根据 routesConfig 生成完整的路由配置文件代码
- */
 function generateRouteFile(config: RouteConfig[]): string {
-  const routeObjects = config.map(item => serializeRoute(item)).join(',\n');
-  // 生成文件内容，注意导入 React、Navigate 和 RouteObject
-  const content = `import React, { Suspense } from 'react';
-import { Navigate, RouteObject } from 'react-router-dom';
+  const routeObjects = config.map((route) => serializeRoute(route)).join(',\n');
 
-${imLines.join('\n')}
+  return `import React, { Suspense } from 'react';
+import type { RouteObject } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
-const routes: RouteObject[] = [
+${importLines.join('\n')}
+
+const generatedRoutes: RouteObject[] = [
 ${routeObjects}
 ];
 
-export default routes;
+export default generatedRoutes;
 `;
-  return content;
 }
 
-// 生成路由配置代码
+const outputPath = path.join(__dirname, '../src/router/generated-routes.tsx');
 const fileContent = generateRouteFile(routesConfig);
 
-// 将生成的代码写入 route.tsx 文件（文件路径根据需要调整）
-const outputPath = path.join(__dirname, '../src/router/content-router.tsx');
 fs.writeFileSync(outputPath, fileContent, 'utf8');
-
-console.log(`路由配置文件已生成到：${outputPath}`);
+console.log(`Route config generated at ${outputPath}`);
